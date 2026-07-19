@@ -137,29 +137,33 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       className="section-pinned z-10"
+      aria-label="Coastal Vista introduction"
     >
       {/* Background Image */}
       <img
         ref={bgRef}
         src={heroImageSrc}
-        alt="Family with drone equipment"
+        alt="Aerial drone photo of the Coastal Vista pilot with his family sitting in the open trunk of a dark SUV, drone controller in hand"
+        width={1440}
+        height={1080}
         className="bg-image hero-bg-img"
         loading="eager"
         fetchPriority="high"
         decoding="async"
       />
 
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
+      {/* Scrims for text readability over photography */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-black/5" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/20" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center px-[6vw]">
         {/* Headline */}
         <div
           ref={headlineRef}
-          className="absolute left-[6vw] top-[14vh] w-[60vw]"
+          className="absolute left-[6vw] top-[14vh] w-[88vw] md:w-[60vw]"
         >
-          <h1 className="headline-hero text-white">
+          <h1 className="headline-hero text-white text-overlay-shadow">
             <span className="headline-line block">COASTAL</span>
             <span className="headline-line block">VISTA</span>
           </h1>
@@ -168,17 +172,17 @@ export default function HeroSection() {
         {/* Subheadline */}
         <p
           ref={subheadlineRef}
-          className="absolute left-[6vw] top-[62vh] w-[30vw] text-white/90 text-base md:text-lg leading-relaxed"
+          className="absolute left-[6vw] top-[62vh] w-[88vw] md:w-[30vw] text-white text-base md:text-lg leading-relaxed text-overlay-shadow"
         >
           Aerial storytelling for brands, real estate, and life's big moments.
         </p>
 
-        {/* Caption */}
+        {/* Caption (decorative; hidden on small screens) */}
         <div
           ref={captionRef}
-          className="absolute right-[4vw] top-[18vh] w-[18vw] text-right"
+          className="hidden md:block absolute right-[4vw] top-[18vh] w-[18vw] text-right"
         >
-          <p className="caption-mono text-white/80 leading-relaxed">
+          <p className="caption-mono text-white/90 leading-relaxed text-overlay-shadow">
             COASTAL VISTA | BASED IN TEXAS | AVAILABLE WORLDWIDE
           </p>
         </div>

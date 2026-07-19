@@ -12,6 +12,9 @@ interface PinnedSectionProps {
   cta: string;
   caption: string;
   image: string;
+  alt: string;
+  imageWidth: number;
+  imageHeight: number;
   zIndex: number;
   endOffset?: string;
   ctaAction?: () => void;
@@ -24,6 +27,9 @@ export default function PinnedSection({
   cta,
   caption,
   image,
+  alt,
+  imageWidth,
+  imageHeight,
   zIndex,
   endOffset = '+=130%',
   ctaAction,
@@ -148,29 +154,33 @@ export default function PinnedSection({
       id={id}
       className="section-pinned"
       style={{ zIndex }}
+      aria-label={headline.join(' ')}
     >
       {/* Background Image (below the fold: lazy + blur-up placeholder) */}
       <img
         ref={bgRef}
         src={image}
-        alt={headline.join(' ')}
+        alt={alt}
+        width={imageWidth}
+        height={imageHeight}
         loading="lazy"
         decoding="async"
         onLoad={() => setImageLoaded(true)}
         className={`bg-image img-blur-up${imageLoaded ? ' is-loaded' : ''}`}
       />
 
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/25 to-transparent" />
+      {/* Scrims for text readability over photography */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/5" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center px-[6vw]">
         {/* Headline */}
         <div
           ref={headlineRef}
-          className="absolute left-[6vw] top-[18vh] w-[44vw]"
+          className="absolute left-[6vw] top-[16vh] md:top-[18vh] w-[88vw] md:w-[44vw]"
         >
-          <h2 className="headline-xl text-white">
+          <h2 className="headline-xl text-white text-overlay-shadow">
             {headline.map((line, i) => (
               <span key={i} className="block">
                 {line}
@@ -182,7 +192,7 @@ export default function PinnedSection({
         {/* Subheadline */}
         <p
           ref={subheadlineRef}
-          className="absolute left-[6vw] top-[52vh] w-[30vw] text-white/90 text-base md:text-lg leading-relaxed"
+          className="absolute left-[6vw] top-[52vh] w-[88vw] md:w-[30vw] text-white text-base md:text-lg leading-relaxed text-overlay-shadow"
         >
           {subheadline}
         </p>
@@ -195,16 +205,16 @@ export default function PinnedSection({
             className="cta-button cta-button-dark absolute left-[6vw] top-[66vh]"
           >
             {cta}
-            <ArrowRight size={14} />
+            <ArrowRight size={14} aria-hidden="true" />
           </button>
         )}
 
-        {/* Caption */}
+        {/* Caption (decorative; hidden on small screens) */}
         <div
           ref={captionRef}
-          className="absolute right-[4vw] top-[18vh] w-[20vw] text-right"
+          className="hidden md:block absolute right-[4vw] top-[18vh] w-[20vw] text-right"
         >
-          <p className="caption-mono text-white/80 leading-relaxed">
+          <p className="caption-mono text-white/90 leading-relaxed text-overlay-shadow">
             {caption}
           </p>
         </div>

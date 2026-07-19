@@ -37,6 +37,10 @@ html {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .headline-hero {
+    font-size: clamp(48px, 15vw, 80px) !important;
+  }
+
   .headline-xl {
     font-size: clamp(40px, 10vw, 56px) !important;
   }

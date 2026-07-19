@@ -6,6 +6,7 @@ import HeroSection from './sections/HeroSection';
 import PinnedSection from './sections/PinnedSection';
 import DroneLineupSection from './sections/DroneLineupSection';
 import ContactSection from './sections/ContactSection';
+import { scrollToSection } from './lib/scroll';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,6 +21,9 @@ const sections = [
     cta: '',
     caption: 'LICENSED PART 107 PILOT | INSURED',
     image: `${baseImagePath}beach-shoreline.jpg`,
+    alt: 'Aerial drone view of a curved sandy beach with turquoise water, gentle surf, palm trees, and a sailboat offshore',
+    imageWidth: 1344,
+    imageHeight: 768,
     ctaAction: () => {},
   },
   {
@@ -29,7 +33,10 @@ const sections = [
     cta: 'Request a Quote',
     caption: 'TWILIGHT, INTERIORS, GROUNDS',
     image: `${baseImagePath}neighborhood-aerial.jpg`,
-    ctaAction: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }),
+    alt: 'Aerial drone view of waterfront luxury homes with pools, boat docks, and palm trees along the coast',
+    imageWidth: 1344,
+    imageHeight: 768,
+    ctaAction: () => scrollToSection('contact'),
   },
   {
     id: 'commercial',
@@ -38,6 +45,9 @@ const sections = [
     cta: '',
     caption: 'CONSTRUCTION, MARINE, EVENTS',
     image: `${baseImagePath}harbor-approach.jpg`,
+    alt: 'Aerial drone view of a commercial shipping port at sunset with container ships, cranes, and tugboats',
+    imageWidth: 1344,
+    imageHeight: 768,
     ctaAction: () => {},
   },
   {
@@ -47,6 +57,9 @@ const sections = [
     cta: '',
     caption: '4K / 60FPS, HDR DELIVERY',
     image: `${baseImagePath}bridge-sweep.jpg`,
+    alt: 'Aerial drone view of a cable-stayed bridge spanning a ship channel at golden hour with cargo ships below',
+    imageWidth: 1440,
+    imageHeight: 1080,
     endOffset: '+=140%',
     ctaAction: () => {},
   },
@@ -57,7 +70,10 @@ const sections = [
     cta: 'Plan Your Shoot',
     caption: 'WEDDINGS, CORPORATE, FESTIVALS',
     image: `${baseImagePath}city-harbor.jpg`,
-    ctaAction: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }),
+    alt: 'Aerial drone view of a coastal city skyline across a working harbor with container terminals and an arch bridge',
+    imageWidth: 1344,
+    imageHeight: 768,
+    ctaAction: () => scrollToSection('contact'),
   },
   {
     id: 'city',
@@ -66,6 +82,9 @@ const sections = [
     cta: '',
     caption: 'PERMITS, LAANC, NIGHT WAIVERS',
     image: `${baseImagePath}downtown-flythrough.jpg`,
+    alt: 'Aerial drone view of a downtown skyline of glass towers beside a river with boats',
+    imageWidth: 1344,
+    imageHeight: 768,
     ctaAction: () => {},
   },
   {
@@ -75,7 +94,10 @@ const sections = [
     cta: 'Book Me',
     caption: 'TURNAROUND: 48 TO 72 HOURS',
     image: `${baseImagePath}city-to-coast.jpg`,
-    ctaAction: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }),
+    alt: 'Aerial drone view of a coastal city skyline at dusk where high-rises meet the beach and surf',
+    imageWidth: 1344,
+    imageHeight: 768,
+    ctaAction: () => scrollToSection('contact'),
   },
 ];
 
@@ -137,23 +159,26 @@ function App() {
       {/* Navigation */}
       <Navigation />
 
-      {/* Hero Section */}
-      <HeroSection />
+      {/* Main content */}
+      <main id="main-content" tabIndex={-1}>
+        {/* Hero Section */}
+        <HeroSection />
 
-      {/* Pinned Sections */}
-      {sections.map((section, index) => (
-        <PinnedSection
-          key={section.id}
-          {...section}
-          zIndex={(index + 2) * 10}
-        />
-      ))}
+        {/* Pinned Sections */}
+        {sections.map((section, index) => (
+          <PinnedSection
+            key={section.id}
+            {...section}
+            zIndex={(index + 2) * 10}
+          />
+        ))}
 
-      {/* Drone Lineup Section */}
-      <DroneLineupSection />
+        {/* Drone Lineup Section */}
+        <DroneLineupSection />
 
-      {/* Contact Section */}
-      <ContactSection />
+        {/* Contact Section */}
+        <ContactSection />
+      </main>
     </div>
   );
 }
